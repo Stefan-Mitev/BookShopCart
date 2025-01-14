@@ -1,4 +1,4 @@
-using BookShopCartMvcUi.Data;
+using BookShopCartMvcUi;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 //using Pomelo.EntityFrameworkCore.MySql;
@@ -18,7 +18,7 @@ builder.Services
     .AddDefaultUI()
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddTransient<IHomeRepository, HomeRepository>();
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
