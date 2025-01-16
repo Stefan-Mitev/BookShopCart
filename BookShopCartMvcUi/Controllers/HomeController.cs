@@ -15,16 +15,16 @@ namespace BookShopCartMvcUi.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index(string sterm="", int genereId=0)
+        public async Task<IActionResult> Index(string sterm="", int genreId=0)
         {
-            IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genereId);
+            IEnumerable<Book> books = await _homeRepository.GetBooks(sterm, genreId);
             IEnumerable<Genre> genres = await _homeRepository.Genres();
             BookDisplayModel bookModel = new BookDisplayModel
             {
                 Books = books,
                 Genres = genres,
                 STerm = sterm,
-                GenreId = genereId
+                GenreId = genreId
             };
             return View(bookModel);
         }
