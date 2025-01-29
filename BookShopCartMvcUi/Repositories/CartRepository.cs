@@ -35,6 +35,7 @@ namespace BookShopCartMvcUi.Repositories
                     _db.ShoppingCarts.Add(cart);
                 }
                 _db.SaveChanges();
+
                 // cart detail section
                 var cartItem = _db.CartDetails
                                   .FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.BookId == bookId);
