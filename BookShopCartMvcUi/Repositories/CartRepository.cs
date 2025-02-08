@@ -120,19 +120,20 @@ namespace BookShopCartMvcUi.Repositories
         }
         public async Task<int> GetCartItemCount(string userId = "")
         {
-            if (!string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId))
             {
                 userId = GetUserId();
             }
             var data = await (from cart in _db.ShoppingCarts
                               join cartDetail in _db.CartDetails
                               on cart.Id equals cartDetail.ShoppingCartId
+                              where cart.UserId == userId //updated line
                               select new { cartDetail.Id }
                        ).ToListAsync();
             return data.Count;
         }
 
-        public async Task<bool> DoCheckout()
+        public async Task<bool> DoCheckout(CheckoutModel model)
         {
             using var transaction = _db.Database.BeginTransaction();
             try
@@ -157,17 +158,23 @@ namespace BookShopCartMvcUi.Repositories
                     throw new InvalidOperationException("Cart is empty");
                 }
 
-                //var pendingRecord = _db.orderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
-                //if (pendingRecord is null)
-                //{
-                //    throw new InvalidOperationException("Order status does not have Pending status");
-                //}
+                var pendingRecord = _db.OrderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
+                if (pendingRecord is null)
+                {
+                    throw new InvalidOperationException("Order status does not have Pending status");
+                }
 
                 var order = new Order
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    OrderStatusId = 1 //pending
+                    Name = model.Name,
+                    Email = model.Email,
+                    MobileNumber = model.MobileNumber,
+                    PaymentMethod = model.PaymentMethod,
+                    Address = model.Address,
+                    IsPaid = false,
+                    OrderStatusId = pendingRecord.Id
                 };
                 _db.Orders.Add(order);
                 _db.SaveChanges();
