@@ -1,9 +1,9 @@
-﻿using BookShopCartMvcUi.Models;
+﻿using BookShoppingCartMvcUI.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace BookShopCartMvcUi.Data
+namespace BookShoppingCartMvcUI.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

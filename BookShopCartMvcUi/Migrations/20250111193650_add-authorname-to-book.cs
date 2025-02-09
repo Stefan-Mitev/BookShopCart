@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookShopCartMvcUi.Migrations
+namespace BookShoppingCartMvcUI.Migrations
 {
     /// <inheritdoc />
     public partial class addauthornametobook : Migration

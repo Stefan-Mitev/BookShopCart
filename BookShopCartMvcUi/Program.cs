@@ -1,4 +1,4 @@
-using BookShopCartMvcUi;
+using BookShoppingCartMvcUI;
 using BookShoppingCartMvcUI.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

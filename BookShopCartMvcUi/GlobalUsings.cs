@@ -1,4 +1,5 @@
-﻿global using BookShopCartMvcUi.Data;
-global using BookShopCartMvcUi.Models;
-global using BookShopCartMvcUi.Models.DTOs;
-global using BookShopCartMvcUi.Repositories;
+﻿global using BookShoppingCartMvcUI.Data;
+global using BookShoppingCartMvcUI.Models;
+global using BookShoppingCartMvcUI.Models.DTOs;
+global using BookShoppingCartMvcUI.Repositories;
+global using BookShoppingCartMvcUI.Constants;

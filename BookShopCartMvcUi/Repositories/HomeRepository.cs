@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using NuGet.Protocol.Plugins;
 
-namespace BookShopCartMvcUi.Repositories
+namespace BookShoppingCartMvcUI.Repositories
 {
     public class HomeRepository : IHomeRepository
     {

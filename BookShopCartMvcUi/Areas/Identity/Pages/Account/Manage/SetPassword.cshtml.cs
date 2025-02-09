@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace BookShopCartMvcUi.Areas.Identity.Pages.Account.Manage
+namespace BookShoppingCartMvcUI.Areas.Identity.Pages.Account.Manage
 {
     public class SetPasswordModel : PageModel
     {

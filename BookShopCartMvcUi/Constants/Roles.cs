@@ -1,4 +1,4 @@
-﻿namespace BookShopCartMvcUi.Constants
+﻿namespace BookShoppingCartMvcUI.Constants
 {
 	public enum Roles
 	{

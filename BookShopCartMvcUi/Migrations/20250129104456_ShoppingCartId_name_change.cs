@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookShopCartMvcUi.Migrations
+namespace BookShoppingCartMvcUI.Migrations
 {
     /// <inheritdoc />
     public partial class ShoppingCartId_name_change : Migration

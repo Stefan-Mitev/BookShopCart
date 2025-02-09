@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace BookShopCartMvcUi.Models.DTOs;
+namespace BookShoppingCartMvcUI.Models.DTOs;
 
 public class CheckoutModel
 {

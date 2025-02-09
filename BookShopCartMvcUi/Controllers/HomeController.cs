@@ -1,9 +1,9 @@
-﻿using BookShopCartMvcUi.Models;
-using BookShopCartMvcUi.Models.DTOs;
+﻿using BookShoppingCartMvcUI.Models;
+using BookShoppingCartMvcUI.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace BookShopCartMvcUi.Controllers
+namespace BookShoppingCartMvcUI.Controllers
 {
     public class HomeController : Controller
     {
