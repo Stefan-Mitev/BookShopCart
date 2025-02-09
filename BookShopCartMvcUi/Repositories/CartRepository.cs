@@ -24,7 +24,10 @@ namespace BookShoppingCartMvcUI.Repositories
             try
             {
                 if (string.IsNullOrEmpty(userId))
+                {
                     throw new UnauthorizedAccessException("user is not logged-in");
+                }
+
                 var cart = await GetCart(userId);
                 if (cart is null)
                 {
@@ -74,19 +77,31 @@ namespace BookShoppingCartMvcUI.Repositories
             {
 
                 if (string.IsNullOrEmpty(userId))
+                {
                     throw new UnauthorizedAccessException("user is not logged-in");
+                }
+
                 var cart = await GetCart(userId);
                 if (cart is null)
+                {
                     throw new InvalidOperationException("Invalid cart");
+                }
+
                 // cart detail section
                 var cartItem = _db.CartDetails
                                   .FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.BookId == bookId);
                 if (cartItem is null)
+                {
                     throw new InvalidOperationException("Not items in cart");
+                }
                 else if (cartItem.Quantity == 1)
+                {
                     _db.CartDetails.Remove(cartItem);
+                }
                 else
+                {
                     cartItem.Quantity = cartItem.Quantity - 1;
+                }
                 _db.SaveChanges();
             }
             catch (Exception ex)
@@ -102,9 +117,12 @@ namespace BookShoppingCartMvcUI.Repositories
             var userId = GetUserId();
             if (userId == null)
             {
-                throw new Exception("Invalid userid");
+                throw new InvalidOperationException("Invalid userid");
             }
             var shoppingCart = await _db.ShoppingCarts
+                                .Include(a => a.CartDetails)
+                                .ThenInclude(a => a.Book)
+                                .ThenInclude(a => a.Stock)
                                 .Include(a => a.CartDetails)
                                 .ThenInclude(a => a.Book)
                                 .ThenInclude(a => a.Genre)
@@ -191,18 +209,19 @@ namespace BookShoppingCartMvcUI.Repositories
 
                     // update stock here
 
-                    //var stock = await _db.Stocks.FirstOrDefaultAsync(a => a.BookId == item.BookId);
-                    //if (stock == null)
-                    //{
-                    //    throw new InvalidOperationException("Stock is null");
-                    //}
+                    var stock = await _db.Stocks.FirstOrDefaultAsync(a => a.BookId == item.BookId);
+                    if (stock == null)
+                    {
+                        throw new InvalidOperationException("Stock is null");
+                    }
 
-                    //if (item.Quantity > stock.Quantity)
-                    //{
-                    //    throw new InvalidOperationException($"Only {stock.Quantity} items(s) are available in the stock");
-                    //}
-                    //// decrease the number of quantity from the stock table
-                    //stock.Quantity -= item.Quantity;
+                    if (item.Quantity > stock.Quantity)
+                    {
+                        throw new InvalidOperationException($"Only {stock.Quantity} items(s) are available in the stock");
+                    }
+
+                    // decrease the number of quantity from the stock table
+                    stock.Quantity -= item.Quantity;
                 }
                 _db.SaveChanges();
 
